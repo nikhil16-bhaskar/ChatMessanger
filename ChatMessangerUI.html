@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<!-- 1st page only channel buttons
+any other page name, send message and message display -->
+	<title>Chat Messanger</title>
+
+	<!-- <link rel="stylesheet" type="text/css" href="ChatMessangerUI.css"> -->
+	
+	<style type="text/css">
+		body {
+		    margin: auto;
+		    width: 30%;
+		    /* border: 3px solid green; */
+		    padding: 10px;
+		    
+    		background-color: darkorchid;
+
+		}
+
+		button {
+    			margin-left: 19px;
+    			border-radius: 12px;
+				}
+	</style>
+
+	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+	<script type="text/javascript">
+	
+	const socket = io()
+	
+	</script>
+</head>
+
+<body>
+<!-- <div class='submitContainer' >	
+	<h1>Enter your Username</h1>
+	<input type="text" placeholder="Enter Name" class="nameField" />
+	<button class="submitName" onclick="changeToSend()">Submit</button>
+</div> -->
+
+<!-- <div class="messageContainer" style="display: none">
+	<h1>Enter Your Messsage</h1>
+	<input type="text" placeholder="Enter Message">
+	<button class="submitMessage" onclick="sendMessage()" >Send</button>
+</div> -->
+
+<h1>Choose a Room/Channel</h1>
+<button><a href="/marvel-room" class="marvel_roomClass">Marvel Room</a></button>
+<button><a href="/dc-room" class="dc_roomClass">DC Room</a></button>
+<button><a href="/anime-room" class="anime_roomClass">Anime Room</a></button>
+<br/>
+<!-- <p class="displayMessages"></p> -->
+
+
+
+
+
+</body>
+</html>

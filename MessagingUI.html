@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		body {
+   			 background-color: darkorchid;
+			}
+		.btnContainer {
+		    margin: auto;
+		    width: 21%;
+		    margin-top: 24px;
+			}
+
+		.submitContainer {
+    		margin-left: 160px;
+			}	
+
+		.messageContainer {
+				margin-left: 160px;
+				}	
+
+		.MessageDisplay {
+    				margin-left: 160px;
+					}	
+		button {
+    		border-radius: 12px;
+    
+			}				
+	</style>
+<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+<script type="text/javascript">
+
+	function changeToSend(){
+		document.getElementsByClassName('submitContainer')[0].style.display = "none"
+		document.getElementsByClassName('messageContainer')[0].style.display = "block"
+
+		// var username =  document.getElementsByClassName('nameField')[0].value
+	}
+
+	const path = window.location.pathname
+	// alert(path)
+	if(path === '/marvel-room'){
+		var socket = io('/marvel-room')	
+	} 
+	else if (path === '/dc-room') {
+		var socket = io('/dc-room')
+	}
+
+	else if(path === '/anime-room'){
+		var socket = io('/anime-room')
+	}
+
+	function sendMessage(){
+		const msg = document.getElementsByClassName('MessageText')[0].value
+		var username =  document.getElementsByClassName('nameField')[0].value
+
+		console.log(msg)
+		console.log('this is username'+ username)
+		socket.emit('newmsg',{usrname:username, description:msg})
+	}
+
+	socket.on('broadcast',function(data){
+		console.log('retured message',data.usrname+ ' ' + data.description)
+		document.getElementsByClassName('MessageDisplay')[0].innerHTML += '<br/><div><b>' + 
+               data.usrname + '</b>: ' + data.description + '</div>'
+	})
+	
+	
+
+</script>
+</head>
+
+<body>
+	<div class="btnContainer">
+		<button><a href="/marvel-room" class="marvel_roomClass">Marvel Room</a></button>
+		<button><a href="/dc-room" class="dc_roomClass">DC Room</a></button>
+		<button><a href="/anime-room" class="anime_roomClass">Anime Room</a></button>
+	</div>
+	<br/>
+
+	<div class='submitContainer' >	
+		<h1>Enter your Username</h1>
+		<input type="text" placeholder="Enter Name" class="nameField" />
+		<button class="submitName" onclick="changeToSend()">Submit</button>
+	</div>
+
+	<div class="messageContainer" style="display: none">
+		<h1>Enter Your Messsage</h1>
+		<input type="text" placeholder="Enter Message" class="MessageText">
+		<button class="submitMessage" onclick="sendMessage()" >Send</button>
+	</div>
+
+<div class="MessageDisplay">
+	
+</div>
+
+</body>
+</html>
